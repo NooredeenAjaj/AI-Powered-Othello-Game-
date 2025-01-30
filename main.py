@@ -74,6 +74,9 @@ def main():
     pygame.quit()
 
 
+# Edge Case Handling: The function breaks the loop as soon as one valid direction is found.
+# This is appropriate for determining if a move is valid but remember to handle the capturing
+# or all valid directions when the move is made.
 def is_valid_move(board, row, col, player):
     if board[row][col] is not None:
         return False  # Cannot place a piece on an already occupied square

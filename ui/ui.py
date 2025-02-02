@@ -1,5 +1,6 @@
 import pygame
 import sys
+from board.Pos import Pos
 
 
 class UI:
@@ -49,7 +50,7 @@ class UI:
             x, y = event.pos
             col = x // self.cell_size
             row = y // self.cell_size
-            return (row, col)
+            return Pos(row, col)
         return None
 
     def update(self, board):

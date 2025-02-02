@@ -1,5 +1,7 @@
 from board.Pos import Pos
 
+import copy
+
 
 class Direction:
     """Class to define directions for movement on the board."""
@@ -28,10 +30,10 @@ class Board:
     def __init__(self):
         self.board = [[None] * 8 for _ in range(8)]
         self.board[3][3], self.board[3][4], self.board[4][3], self.board[4][4] = (
-            "W",
-            "B",
             "B",
             "W",
+            "W",
+            "B",
         )
 
     def is_within_bounds(self, pos):
@@ -97,3 +99,14 @@ class Board:
         black_score = sum(row.count("B") for row in self.board)
         white_score = sum(row.count("W") for row in self.board)
         return {"B": black_score, "W": white_score}
+
+    def is_full(self):
+
+        return all(cell is not None for row in self.board for cell in row)
+
+    def result(self, pos, player):
+        """Return a new board state after making a move, without modifying the original board."""
+        new_board = copy.deepcopy(self)  # Skapa en separat kopia av brädet
+        new_board.make_move(pos, player)
+        new_board.flip_pieces(pos, player)
+        return new_board  # Returnerar ett nytt bräde

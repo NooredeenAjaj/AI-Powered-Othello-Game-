@@ -95,10 +95,19 @@ class Board:
 
         return "W" if player == "B" else "B"
 
+    # def score(self):
+    #     black_score = sum(row.count("B") for row in self.board)
+    #     white_score = sum(row.count("W") for row in self.board)
+    #     return {"B": black_score, "W": white_score}
     def score(self):
         black_score = sum(row.count("B") for row in self.board)
         white_score = sum(row.count("W") for row in self.board)
-        return {"B": black_score, "W": white_score}
+        if black_score > white_score:
+            return {"B": 1, "W": 0}  # Svart leder
+        elif white_score > black_score:
+            return {"B": 0, "W": -1}  # Vit leder
+        else:
+            return {"B": 0, "W": 0}  # Lika
 
     def is_full(self):
 

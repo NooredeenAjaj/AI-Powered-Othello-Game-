@@ -81,6 +81,66 @@ class AI_adv:
 
         return best_score
 
+    # def evaluate_board(self, board):
+    #     score = board.score()
+    #     return score[self.player_color] - score[board.get_opponent(self.player_color)]
+
+    # def evaluate_board(self, board):
+    #     corners = [(0, 0), (0, 7), (7, 0), (7, 7)]
+    #     corner_value = 25
+    #     edge_value = 5
+    #     board_evaluation = 0
+
+    #     for r in range(8):
+    #         for c in range(8):
+    #             cell_value = 0
+    #             if (r, c) in corners:
+    #                 cell_value = corner_value
+    #             elif r == 0 or r == 7 or c == 0 or c == 7:
+    #                 cell_value = edge_value
+
+    #             if board.board[r][c] == self.player_color:
+    #                 board_evaluation += cell_value
+    #             elif board.board[r][c] == board.get_opponent(self.player_color):
+    #                 board_evaluation -= cell_value
+
+    #     # Additional score based on simple piece count
+    #     # scores = board.score()
+    #     # board_evaluation += (
+    #     #     scores[self.player_color] - scores[board.get_opponent(self.player_color)]
+    #     # )
+
+    #     return board_evaluation
+
     def evaluate_board(self, board):
-        score = board.score()
-        return score[self.player_color] - score[board.get_opponent(self.player_color)]
+        edges = {(r, c): 5 for r in [0, 7] for c in range(8)} | {
+            (r, c): 5 for r in range(8) for c in [0, 7]
+        }
+
+        corners = {(r, c): 25 for r in [0, 7] for c in [0, 7]}
+        x_squares = {(r, c): -20 for r in [1, 6] for c in [1, 6]}
+        c_squares = {(r, c): 10 for r in [0, 7] for c in [1, 6]} | {
+            (r, c): 10 for r in [1, 6] for c in [0, 7]
+        }
+        middle_block = {(r, c): 3 for r in range(2, 6) for c in range(2, 6)}
+
+        # Lägg in i "position_values" i ordning så att mer specifika värden inte överskrivs
+        position_values = {}
+        # Först edges
+        position_values.update(edges)
+        # Sedan corners, c-squares, x-squares, middle block:
+        position_values.update(corners)
+        position_values.update(x_squares)
+        position_values.update(c_squares)
+        position_values.update(middle_block)
+
+        board_evaluation = 0
+        for r in range(8):
+            for c in range(8):
+                cell_value = position_values.get((r, c), 0)
+                if board.board[r][c] == self.player_color:
+                    board_evaluation += cell_value
+                elif board.board[r][c] == board.get_opponent(self.player_color):
+                    board_evaluation -= cell_value
+
+        return board_evaluation

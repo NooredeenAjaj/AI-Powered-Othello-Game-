@@ -42,7 +42,7 @@ class OthelloClient:
             print("Server:", self._read_line(s))
 
         # Hantera färgval i testläge (port 9035)
-        if self.server_port == 9035:
+        if self.server_port == 9045:
             line = self._read_line(s)
             print("Server:", line)  # "choose colour, 'd' for dark, 'w' for white."
             self._send_line(s, self.color_choice if self.color_choice else "d")

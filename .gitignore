@@ -1,1 +1,15 @@
 .env
+# Ignorera Python-kompilerade filer
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorera virtuella miljöer
+venv/
+env/
+
+# Ignorera IDE-specifika filer
+.vscode/
+.idea/
+

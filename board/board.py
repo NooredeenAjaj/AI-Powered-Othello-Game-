@@ -1,14 +1,6 @@
 from board.Pos import Pos
-
+from board.Direction import Direction
 import copy
-
-
-class Direction:
-    """Class to define directions for movement on the board."""
-
-    def __init__(self, delta_row, delta_col):
-        self.delta_row = delta_row
-        self.delta_col = delta_col
 
 
 # Define all eight possible directions in Othello
@@ -100,28 +92,15 @@ class Board:
         white_score = sum(row.count("W") for row in self.board)
         return {"B": black_score, "W": white_score}
 
-    # def score(self):
-    #     black_score = sum(row.count("B") for row in self.board)
-    #     white_score = sum(row.count("W") for row in self.board)
-    #     if black_score > white_score:
-    #         return {"B": 1, "W": 0}  # Svart leder
-    #     elif white_score > black_score:
-    #         return {"B": 0, "W": -1}  # Vit leder
-    #     else:
-    #         return {"B": 0, "W": 0}  # Lika
-
     def is_full(self):
 
         return all(cell is not None for row in self.board for cell in row)
 
     def result(self, pos, player):
         """Return a new board state after making a move, without modifying the original board."""
-        # new_board = copy.deepcopy(self)  # Skapa en separat kopia av brädet
         new_board = Board()
-        new_board.board = [
-            row[:] for row in self.board
-        ]  # Kopierar endast listan, inte hela objektet
+        new_board.board = [row[:] for row in self.board]
 
         new_board.make_move(pos, player)
         new_board.flip_pieces(pos, player)
-        return new_board  # Returnerar ett nytt bräde
+        return new_board

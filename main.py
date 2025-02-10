@@ -3,17 +3,19 @@ import pygame
 from ai.ai import AI
 from board.board import Board
 from ai.aiadv import AI_adv
-from newwork.OthelloClient import OthelloClient
 
 
 def main():
 
     ui = UI()
-    ai = AI("W")
+
     board = Board()
     aiadvans = AI_adv("W")
     running = True
     current_player = "B"
+    for p in board.get_all_valid_moves("B"):
+
+        print(p.row, p.col)
     while running:
         if current_player == "B":
             valid_moves = board.get_all_valid_moves(current_player)
@@ -32,8 +34,6 @@ def main():
 
         else:
 
-            # move = ai.find_random_valid_move(valid_moves)
-            # move = ai.find_best_move(board=board)
             print("ai will play")
             move = aiadvans.adversarial_search(board)
             print("ai is done")

@@ -56,7 +56,7 @@ We also integrated **Alpha-Beta Pruning** to reduce computation time. The most c
 Our heuristic and evaluation functions are effective because they do not simply calculate the score; they also encourage moves that place pieces in corners, edges, and central blocks. Additionally, a **dynamic control mechanism** is in place. The goal of dynamic control is to motivate the AI to choose moves that yield more pieces when many empty spaces remain on the board (early-game state). However, as the game progresses and fewer empty spaces remain, the heuristic function is weighted more heavily.
 
 
-## 👨‍💻 Authors
+## 👨‍💻 Author
 - **Noor Mustafa** - [GitHub Profile](https://github.com/NooredeenAjaj)
 
 

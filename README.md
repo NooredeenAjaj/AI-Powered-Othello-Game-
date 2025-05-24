@@ -57,7 +57,7 @@ Our heuristic and evaluation functions are effective because they do not simply 
 
 
 ## 👨‍💻 Authors
-- **Your Name** - [GitHub Profile](https://github.com/NooredeenAjaj)
+- **Noor Mustafa** - [GitHub Profile](https://github.com/NooredeenAjaj)
 
 
 ---
